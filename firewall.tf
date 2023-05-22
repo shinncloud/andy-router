@@ -20,8 +20,24 @@ module "beammp_http" {
 
 module "caddy_http" {
   source     = "./modules/port-forward"
-  ports      = [443]
+  ports      = [443, 8020]
   protocols  = ["tcp"]
   to_address = local.ip_miniboy
   comment    = "caddy http"
+}
+
+module "acc_udp" {
+  source     = "./modules/port-forward"
+  ports      = [9231]
+  protocols  = ["tcp", "udp"]
+  to_address = local.ip_miniboy
+  comment    = "acc udp"
+}
+
+module "acc_tcp" {
+  source     = "./modules/port-forward"
+  ports      = [9232]
+  protocols  = ["tcp"]
+  to_address = local.ip_miniboy
+  comment    = "acc tcp"
 }
