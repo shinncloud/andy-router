@@ -41,3 +41,12 @@ module "acc_tcp" {
   to_address = local.ip_miniboy
   comment    = "acc tcp"
 }
+
+
+module "ats" {
+  source     = "./modules/port-forward"
+  ports      = [27015, 27016]
+  protocols  = ["tcp", "udp"]
+  to_address = local.ip_miniboy
+  comment    = "ats trucks"
+}

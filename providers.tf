@@ -2,7 +2,7 @@ terraform {
   required_providers {
     routeros = {
       source = "terraform-routeros/routeros"
-      version = "1.3.8"
+      version = "1.32.5"
     }
   }
 
