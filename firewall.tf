@@ -1,5 +1,8 @@
 locals {
-  ip_miniboy = "192.168.1.105"
+  ip_miniboy   = "192.168.1.105"
+  ip_laraboy   = "192.168.1.104"
+  ip_macpro    = "192.168.1.63"
+  ip_meshstats = "192.168.1.93"
 }
 
 module "beammp" {
@@ -42,11 +45,26 @@ module "acc_tcp" {
   comment    = "acc tcp"
 }
 
-
 module "ats" {
   source     = "./modules/port-forward"
   ports      = [27015, 27016]
   protocols  = ["tcp", "udp"]
   to_address = local.ip_miniboy
   comment    = "ats trucks"
+}
+
+module "laraboy" {
+  source     = "./modules/port-forward"
+  ports      = [22]
+  protocols  = ["tcp"]
+  to_address = local.ip_laraboy
+  comment    = "laraboy"
+}
+
+module "certbot_meshstats" {
+  source     = "./modules/port-forward"
+  ports      = [8094]
+  protocols  = ["tcp"]
+  to_address = local.ip_meshstats
+  comment    = "meshstats certbot"
 }
